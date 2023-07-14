@@ -1,5 +1,6 @@
 import express, { Express, Request, Response, NextFunction } from 'express';
 import dotenv from 'dotenv';
+import { routes } from "./routes";
 
 dotenv.config();
 
@@ -7,16 +8,17 @@ dotenv.config();
 const app: Express = express();
 const port = process.env.PORT;
 
+
 // middleware
+app.use(express.json());
+
 app.use((req: Request, res: Response, next: NextFunction) => {
   console.log(req.path, req.method);
   next();
 });
 
 //routes
-app.get('/', (req: Request, res: Response) => {
-  res.json({ mssg: 'Welecome to the app' });
-});
+app.use(routes);
 
 // listen for requests
 app.listen(port, () => {
