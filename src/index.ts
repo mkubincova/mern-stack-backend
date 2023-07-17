@@ -2,6 +2,7 @@ import express, { Express, Request, Response, NextFunction } from 'express';
 import dotenv from 'dotenv';
 import { routes } from "./routes";
 import mongoose from 'mongoose';
+import cors from 'cors';
 
 dotenv.config();
 
@@ -10,7 +11,15 @@ const app: Express = express();
 const port = process.env.PORT;
 const uri = process.env.MONGO_URI || '';
 
+// cors options
+const allowedOrigins = ['http://localhost:5173'];
+
+const options: cors.CorsOptions = {
+  origin: allowedOrigins
+};
+
 // middleware
+app.use(cors(options));
 app.use(express.json());
 
 app.use((req: Request, res: Response, next: NextFunction) => {
