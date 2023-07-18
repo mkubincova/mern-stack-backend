@@ -7,9 +7,10 @@ const WorkoutSchema: Schema<IWorkoutDocument> = new Schema({
     load: { type: Number, required: true },
 }, { timestamps: true });
 
-WorkoutSchema.statics.buildWorkout = (args: IWorkout) => {
-    return new Workout(args);
-};
+// register function with types
+// WorkoutSchema.statics.buildWorkout = (args: IWorkout) => {
+//     return new Workout(args);
+// };
 
 const Workout = model<IWorkoutDocument, IWorkoutModel>('Workout', WorkoutSchema);
 

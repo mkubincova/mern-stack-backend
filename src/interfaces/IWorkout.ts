@@ -9,5 +9,6 @@ export interface IWorkout {
 export interface IWorkoutDocument extends IWorkout, Document { }
 
 export interface IWorkoutModel extends Model<IWorkoutDocument> {
-    buildWorkout(args: IWorkout): IWorkoutDocument;
+    // types for statics (added to model)
+    // buildWorkout(args: IWorkout): IWorkoutDocument;
 }

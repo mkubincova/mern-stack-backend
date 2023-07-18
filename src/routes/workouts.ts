@@ -1,4 +1,4 @@
-import express, { Request, Response, Router } from 'express';
+import express, { Router } from 'express';
 import { createWorkout, getWorkout, getWorkouts, deleteWorkout, updateWorkout } from "../controllers/workoutController";
 
 export const router: Router = express.Router();

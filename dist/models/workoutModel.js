@@ -6,8 +6,9 @@ const WorkoutSchema = new mongoose_1.Schema({
     reps: { type: Number, required: true },
     load: { type: Number, required: true },
 }, { timestamps: true });
-WorkoutSchema.statics.buildWorkout = (args) => {
-    return new Workout(args);
-};
+// register function with types
+// WorkoutSchema.statics.buildWorkout = (args: IWorkout) => {
+//     return new Workout(args);
+// };
 const Workout = (0, mongoose_1.model)('Workout', WorkoutSchema);
 exports.default = Workout;
