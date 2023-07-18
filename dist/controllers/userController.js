@@ -8,15 +8,26 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.signoupUser = exports.loginUser = void 0;
+exports.signupUser = exports.loginUser = void 0;
+const userModel_1 = __importDefault(require("../models/userModel"));
 // login user
 const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.json({ msg: 'login' });
 });
 exports.loginUser = loginUser;
 // signup user
-const signoupUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    res.json({ msg: 'signup' });
+const signupUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { email, password } = req.body;
+    try {
+        const user = yield userModel_1.default.signup(email, password);
+        res.status(201).json({ email, user });
+    }
+    catch (error) {
+        res.status(400).json({ error: error.message });
+    }
 });
-exports.signoupUser = signoupUser;
+exports.signupUser = signupUser;

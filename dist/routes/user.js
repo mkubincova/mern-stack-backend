@@ -10,4 +10,4 @@ exports.router = express_1.default.Router();
 // login
 exports.router.post('/login', userController_1.loginUser);
 // signup
-exports.router.post('/signup', userController_1.signoupUser);
+exports.router.post('/signup', userController_1.signupUser);

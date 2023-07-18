@@ -1,9 +1,9 @@
 import { Document, Model } from 'mongoose';
 
 export interface IWorkout {
-    title: String;
-    reps: Number;
-    load: Number;
+    title: string;
+    reps: number;
+    load: number;
 }
 
 export interface IWorkoutDocument extends IWorkout, Document { }
