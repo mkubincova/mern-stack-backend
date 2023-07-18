@@ -14,6 +14,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.signupUser = exports.loginUser = void 0;
 const userModel_1 = __importDefault(require("../models/userModel"));
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const createToken = (_id) => {
+    if (!process.env.AUTH_SECRET) {
+        throw new Error('AUTH_SECRET must be defined');
+    }
+    return jsonwebtoken_1.default.sign({ _id }, process.env.AUTH_SECRET, { expiresIn: '3d' });
+};
 // login user
 const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.json({ msg: 'login' });
@@ -24,7 +31,9 @@ const signupUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     const { email, password } = req.body;
     try {
         const user = yield userModel_1.default.signup(email, password);
-        res.status(201).json({ email, user });
+        // create token
+        const token = createToken(user._id);
+        res.status(201).json({ email, token });
     }
     catch (error) {
         res.status(400).json({ error: error.message });
