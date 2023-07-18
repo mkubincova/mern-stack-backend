@@ -23,7 +23,16 @@ const createToken = (_id) => {
 };
 // login user
 const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    res.json({ msg: 'login' });
+    const { email, password } = req.body;
+    try {
+        const user = yield userModel_1.default.login(email, password);
+        // create token
+        const token = createToken(user._id);
+        res.status(201).json({ email, token });
+    }
+    catch (error) {
+        res.status(400).json({ error: error.message });
+    }
 });
 exports.loginUser = loginUser;
 // signup user

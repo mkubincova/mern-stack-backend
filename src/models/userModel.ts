@@ -26,6 +26,21 @@ UserSchema.statics.signup = async function (email: string, password: string) {
     return user;
 };
 
+// static login method
+UserSchema.statics.login = async function (email: string, password: string) {
+
+    // validation
+    if (!email || !password) throw Error('All fields are required');
+
+    const user = await this.findOne({ email });
+    if (!user) throw Error('Incorrect email');
+
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) throw Error('Incorrect password');
+
+    return user;
+};
+
 const User = model<IUserDocument, IUserModel>('User', UserSchema);
 
 export default User;
