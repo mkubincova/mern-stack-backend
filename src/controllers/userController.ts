@@ -3,10 +3,7 @@ import { Request, Response } from 'express';
 import jwt from "jsonwebtoken";
 
 const createToken = (_id: string) => {
-    if (!process.env.AUTH_SECRET) {
-        throw new Error('AUTH_SECRET must be defined');
-    }
-    return jwt.sign({ _id }, process.env.AUTH_SECRET, { expiresIn: '3d' });
+    return jwt.sign({ _id }, process.env.AUTH_SECRET!, { expiresIn: '3d' });
 };
 
 

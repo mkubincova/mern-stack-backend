@@ -16,9 +16,6 @@ exports.signupUser = exports.loginUser = void 0;
 const userModel_1 = __importDefault(require("../models/userModel"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const createToken = (_id) => {
-    if (!process.env.AUTH_SECRET) {
-        throw new Error('AUTH_SECRET must be defined');
-    }
     return jsonwebtoken_1.default.sign({ _id }, process.env.AUTH_SECRET, { expiresIn: '3d' });
 };
 // login user

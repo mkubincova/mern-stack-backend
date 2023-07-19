@@ -6,7 +6,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.router = void 0;
 const express_1 = __importDefault(require("express"));
 const workoutController_1 = require("../controllers/workoutController");
+const requireAuth_1 = require("../middleware/requireAuth");
 exports.router = express_1.default.Router();
+// require auth for all workout routes
+exports.router.use(requireAuth_1.requireAuth);
 // GET all workouts
 exports.router.get('/', workoutController_1.getWorkouts);
 // GET a single workout
