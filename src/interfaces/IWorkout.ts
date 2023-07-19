@@ -4,6 +4,7 @@ export interface IWorkout {
     title: string;
     reps: number;
     load: number;
+    user_id: string;
 }
 
 export interface IWorkoutDocument extends IWorkout, Document { }

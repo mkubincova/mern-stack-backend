@@ -17,7 +17,9 @@ const workoutModel_1 = __importDefault(require("../models/workoutModel"));
 const mongoose_1 = __importDefault(require("mongoose"));
 // GET all workouts
 const getWorkouts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const workouts = yield workoutModel_1.default.find({}).sort({ createdAt: -1 });
+    var _a;
+    const user_id = (_a = req.user) === null || _a === void 0 ? void 0 : _a._id;
+    const workouts = yield workoutModel_1.default.find({ user_id }).sort({ createdAt: -1 });
     res.status(200).json(workouts);
 });
 exports.getWorkouts = getWorkouts;
@@ -34,6 +36,7 @@ const getWorkout = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 exports.getWorkout = getWorkout;
 // POST a new workout
 const createWorkout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _b;
     const { title, load, reps } = req.body;
     let emptyFields = [];
     if (!title)
@@ -45,7 +48,8 @@ const createWorkout = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     if (emptyFields.length > 0)
         return res.status(400).json({ error: 'Please fill in all the fields', emptyFields });
     try {
-        const workout = yield workoutModel_1.default.create({ title, load, reps });
+        const user_id = (_b = req.user) === null || _b === void 0 ? void 0 : _b._id;
+        const workout = yield workoutModel_1.default.create({ title, load, reps, user_id });
         res.status(200).json(workout);
     }
     catch (error) {
