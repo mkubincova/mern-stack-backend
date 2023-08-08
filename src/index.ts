@@ -22,13 +22,10 @@ const options: cors.CorsOptions = {
 app.use(cors(options));
 app.use(express.json());
 
-app.use((req: Request, res: Response, next: NextFunction) => {
-  console.log(req.path, req.method);
-  next();
-});
-
 // Add a middleware to set CORS headers
 app.use((req: Request, res: Response, next: NextFunction) => {
+  console.log(req.path, req.method);
+
   // Set the necessary CORS headers
   res.header('Access-Control-Allow-Origin', req.header('origin'));
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
