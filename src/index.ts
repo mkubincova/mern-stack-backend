@@ -22,6 +22,9 @@ const options: cors.CorsOptions = {
 app.use(cors(options));
 app.use(express.json());
 
+// routes
+app.use(routes);
+
 // Add a middleware to set CORS headers
 app.use((req: Request, res: Response, next: NextFunction) => {
   console.log(req.path, req.method);
@@ -33,9 +36,6 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
   next();
 });
-
-// routes
-app.use(routes);
 
 // connect to db
 mongoose.connect(uri)

@@ -14,19 +14,24 @@ const app = (0, express_1.default)();
 const port = process.env.PORT;
 const uri = process.env.MONGO_URI || '';
 // cors options
-const allowedOrigins = ['http://localhost:5173'];
+const allowedOrigins = ['http://localhost:5173', 'https://mern-stack-frontend-neon.vercel.app'];
 const options = {
     origin: allowedOrigins
 };
 // middleware
 app.use((0, cors_1.default)(options));
 app.use(express_1.default.json());
-app.use((req, res, next) => {
-    console.log(req.path, req.method);
-    next();
-});
 // routes
 app.use(routes_1.routes);
+// Add a middleware to set CORS headers
+app.use((req, res, next) => {
+    console.log(req.path, req.method);
+    // Set the necessary CORS headers
+    res.header('Access-Control-Allow-Origin', req.header('origin'));
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    next();
+});
 // connect to db
 mongoose_1.default.connect(uri)
     .then(() => {
