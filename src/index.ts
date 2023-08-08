@@ -12,7 +12,7 @@ const port = process.env.PORT;
 const uri = process.env.MONGO_URI || '';
 
 // cors options
-const allowedOrigins = ['http://localhost:5173', 'https://mern-stack-frontend-neon.vercel.app/'];
+const allowedOrigins = ['http://localhost:5173', 'https://mern-stack-frontend-neon.vercel.app'];
 
 const options: cors.CorsOptions = {
   origin: allowedOrigins
